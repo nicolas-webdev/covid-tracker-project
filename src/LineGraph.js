@@ -83,6 +83,30 @@ function LineGraph({ casesType }) {
     fetchData();
   }, [casesType]);
 
+  const setColor = (casesType) => {
+    switch (casesType) {
+      case "recovered":
+        return {
+          backgroundColor: "rgba(125, 215, 29, 0.5)",
+          borderColor: "#7dd71d",
+        };
+        break;
+      case "deaths":
+        return {
+          backgroundColor: "rgba(153, 67, 251, 0.5)",
+          borderColor: "#9043fb",
+        };
+        break;
+
+      default:
+        return {
+          backgroundColor: "rgba(204, 16, 52, 0.5)",
+          borderColor: "#CC1034",
+        };
+        break;
+    }
+  };
+
   return (
     <div className="lineGraph">
       {data?.length > 0 && (
@@ -91,8 +115,8 @@ function LineGraph({ casesType }) {
           data={{
             datasets: [
               {
-                backgroundColor: "rgba(204, 16, 52, 0.5)",
-                borderColor: "#CC1034",
+                backgroundColor: setColor(casesType).backgroundColor,
+                borderColor: setColor(casesType).backgroundColor.borderColor,
                 data: data,
               },
             ],
