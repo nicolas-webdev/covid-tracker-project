@@ -40,3 +40,19 @@
 .infoBox__cases--deaths {
   color: purple !important;
 }
+
+@media (max-width: 479px) {
+  .infoBox:not(:last-child) {
+    margin-right: 0px;
+  }
+  .infoBox {
+    margin-top: 1rem;
+  }
+  .infoBox p:last-child {
+    text-align: right;
+  }
+
+  .infoBox__total {
+    margin-top: 8px !important;
+  }
+}

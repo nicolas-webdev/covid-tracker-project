@@ -85,3 +85,19 @@ body {
     margin-top: 1rem;
   }
 }
+
+@media (max-width: 990px) {
+  .app {
+    flex-direction: column;
+  }
+
+  .app__right {
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .app__stats {
+    flex-direction: column;
+  }
+}
