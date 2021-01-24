@@ -28,6 +28,15 @@ body {
   justify-content: space-between;
 }
 
+.app__left {
+  margin-bottom: 16px;
+}
+
+.app__graphTitle {
+  padding-top: 36px;
+  padding-bottom: 16px;
+}
+
 @media (max-width: 990px) {
   .app {
     flex-direction: column;
