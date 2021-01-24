@@ -1,5 +1,6 @@
+import React, { useState, useEffect } from "react";
 import "./App.css";
-import "leaflet/dist/leaflet.css";
+
 import {
   FormControl,
   MenuItem,
@@ -7,10 +8,10 @@ import {
   Card,
   CardContent,
 } from "@material-ui/core";
-import React, { useState, useEffect } from "react";
 
 import { sortData, prettyPrintStat } from "./util";
 
+import "leaflet/dist/leaflet.css";
 import InfoBox from "./InfoBox";
 import Map from "./Map";
 import Table from "./Table";
@@ -19,6 +20,7 @@ import LineGraph from "./LineGraph";
 function App() {
   //HOOKS
   //State
+  const [casesType, setCasesType] = useState("cases");
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
@@ -31,6 +33,7 @@ function App() {
   });
 
   //OnMount
+  //load initial data
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
@@ -38,6 +41,7 @@ function App() {
         setCountryInfo(data);
       });
   }, []);
+  //load new selected country data
   useEffect(() => {
     const getCountriesData = async () => {
       await fetch("https://disease.sh/v3/covid-19/countries")
@@ -59,9 +63,9 @@ function App() {
   }, []);
 
   //Event Handlers
+  // ON COUNTRY CHANGE HANDLER
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
-
     const url =
       countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
@@ -82,13 +86,17 @@ function App() {
     <div className="app">
       <div className="app__left">
         <div className="app__header">
+          {/* TITLE */}
           <h1>COVID-19 Tracker</h1>
+
+          {/* DROPDOWN MENU */}
           <FormControl name="app__dropdown">
             <Select
               onChange={onCountryChange}
               variant="outlined"
               value={country}
             >
+              {/* items */}
               <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
                 <MenuItem key={country.name} value={country.value}>
@@ -99,30 +107,44 @@ function App() {
           </FormControl>
         </div>
 
+        {/* INFOBOXES */}
         <div className="app__stats">
           <InfoBox
+            onClick={(e) => setCasesType("cases")}
             title="Coronavirus cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={prettyPrintStat(countryInfo.cases)}
           ></InfoBox>
           <InfoBox
+            onClick={(e) => setCasesType("recovered")}
             title="Recovered"
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={prettyPrintStat(countryInfo.recovered)}
           ></InfoBox>
           <InfoBox
+            onClick={(e) => setCasesType("deaths")}
             title="Deaths"
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={prettyPrintStat(countryInfo.deaths)}
           ></InfoBox>
         </div>
+
         {/* MAAAAAAAP */}
-        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
+        <Map
+          casesType={casesType}
+          countries={mapCountries}
+          center={mapCenter}
+          zoom={mapZoom}
+        />
       </div>
+
+      {/* TABLE LIST */}
       <Card className="app__right">
         <CardContent>
           <h3>Live Cases by Country</h3>
           <Table countries={tableData} />
+
+          {/* TABLE GRAPH */}
           <h3>Worldwide New Cases</h3>
           <LineGraph />
         </CardContent>
