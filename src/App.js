@@ -23,6 +23,7 @@ function App() {
   const [country, setCountry] = useState("worldwide");
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
+  const [mapCountries, setMapCountries] = useState([]);
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCenter, setMapCenter] = useState({
     lat: 38.7129,
@@ -47,6 +48,8 @@ function App() {
             value: country.countryInfo.iso2,
           }));
 
+          setMapCountries(data);
+
           const sortedData = sortData(data);
           setTableData(sortedData);
           setCountries(countriesList);
@@ -69,7 +72,7 @@ function App() {
       .then((data) => {
         setCountry(countryCode);
         setCountryInfo(data);
-        console.log(data);
+
         setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
@@ -113,7 +116,8 @@ function App() {
             total={countryInfo.deaths}
           ></InfoBox>
         </div>
-        <Map center={mapCenter} zoom={mapZoom} />
+        {/* MAAAAAAAP */}
+        <Map countries={mapCountries} center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
         <CardContent>
