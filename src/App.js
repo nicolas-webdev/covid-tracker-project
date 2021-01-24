@@ -145,15 +145,16 @@ function App() {
         />
       </div>
 
-      {/* TABLE LIST */}
+      {/* TABLE Container */}
       <Card className="app__right">
         <CardContent className="app__cardContent">
-          <h3>Live Cases by Country</h3>
-          <Table countries={tableData} />
-
           {/* TABLE GRAPH */}
           <h3 className="app__graphTitle">Worldwide new {casesType}</h3>
           <LineGraph casesType={casesType} />
+
+          {/* Table List */}
+          <h3>Live Cases by Country</h3>
+          <Table countries={tableData} />
         </CardContent>
       </Card>
     </div>
