@@ -20,3 +20,23 @@
   font-size: 0.8rem !important;
   margin-top: 15px !important;
 }
+
+.infoBox--selected {
+  border-top: 10px solid red;
+}
+
+.infoBox--selected.infoBox--recovered {
+  border-top: 10px solid greenyellow;
+}
+
+.infoBox--selected.infoBox--deaths {
+  border-top: 10px solid purple;
+}
+
+.infoBox__cases--recovered {
+  color: green !important;
+}
+
+.infoBox__cases--deaths {
+  color: purple !important;
+}

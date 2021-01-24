@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  transition: all 0.35s;
 }
 
 body {
@@ -10,6 +11,15 @@ body {
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
+}
+
+.app__dropdown {
+  background: white;
+}
+
+.app__header > h1 {
+  color: #fc3c3c;
+  font-size: 2rem;
 }
 
 .app__header {
@@ -35,6 +45,10 @@ body {
 .app__graphTitle {
   padding-top: 36px;
   padding-bottom: 16px;
+}
+
+.app__mapContainer {
+  min-height: 80vh;
 }
 
 @media (max-width: 990px) {
