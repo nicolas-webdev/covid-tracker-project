@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import React, { useState, useEffect } from "react";
 
-import { sortData } from "./util";
+import { sortData, prettyPrintStat } from "./util";
 
 import InfoBox from "./InfoBox";
 import Map from "./Map";
@@ -102,18 +102,18 @@ function App() {
         <div className="app__stats">
           <InfoBox
             title="Coronavirus cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
           ></InfoBox>
           <InfoBox
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
           ></InfoBox>
           <InfoBox
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
           ></InfoBox>
         </div>
         {/* MAAAAAAAP */}
